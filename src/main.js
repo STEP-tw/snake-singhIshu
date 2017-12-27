@@ -21,18 +21,18 @@ const animateSnake=function() {
   }
 }
 
-const isNorthOrWestBrdr = function(coordX,coordY) {
+const isNorthOrWestEdge = function(coordX,coordY) {
   return coordX < 0 || coordY < 0;
 }
 
-const isSouthOrEastBrdr = function(coordX,coordY) {
+const isSouthOrEastEdge = function(coordX,coordY) {
   return coordX > 119 || coordY > 59 ;
 }
 
-const hasTouchedBorder = function(head) {
+const hasHitTheEdge = function(head) {
   let coordX = head.getCoord()[0];
   let coordY = head.getCoord()[1];
-  return isSouthOrEastBrdr(coordX,coordY) || isNorthOrWestBrdr(coordX,coordY);
+  return isSouthOrEastEdge(coordX,coordY) || isNorthOrWestEdge(coordX,coordY);
 }
 
 const getCoordsOfBody = function(body) {
@@ -41,7 +41,7 @@ const getCoordsOfBody = function(body) {
   })
 }
 
-const hasTouchedItself = function(head,body) {
+const hasEatenItself = function(head,body) {
   let bodyCoords=getCoordsOfBody(body);
   return bodyCoords.some(function(bodyCoord) {
     return head.isSameCoordAs(bodyCoord);
@@ -56,7 +56,7 @@ const displayResult = function() {
 }
 
 const isGameOver = function (head,body) {
-  return hasTouchedBorder(head,body) || hasTouchedItself(head,body);
+  return hasHitTheEdge(head,body) || hasEatenItself(head,body);
 }
 
 const endGame= function(head,body) {
