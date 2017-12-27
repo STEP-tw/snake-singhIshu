@@ -1,0 +1,18 @@
+## Objective
+
+1. To Detect the end of the game based on the conditions given.
+2. Once the game is over, offer the user a chance to play the game again.
+
+## Inputs Needed
+
+1. Coordinate Range of the Border.
+2. All the Coordinates of the Snake's Body and Head.
+
+
+## Step to Follow
+
+1. Track the position of the snake continuously.
+2. Set Limits for the snake.
+3. Throw message as soon as the snake touches the limits assigned or border.
+4. End the Game when the snake touches his body.
+5. Show the game link to the user so that he can play again.
