@@ -25,7 +25,7 @@ const isNorthOrWestBrdr = function(coordX,coordY) {
 }
 
 const isSouthOrEastBrdr = function(coordX,coordY) {
-  return coordX = 120 || coordY = 60 ;
+  return coordX > 119 || coordY > 59 ;
 }
 
 const hasTouchedBorder = function(head) {
