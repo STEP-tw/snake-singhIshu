@@ -9,10 +9,11 @@ const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
   let head=snake.getHead();
-  endGame(head);
+  let body=snake.getBody();
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
+  endGame(head,body);
   if(head.isSameCoordAs(food)) {
     snake.grow();
     createFood(numberOfRows,numberOfCols);
@@ -34,15 +35,17 @@ const hasTouchedBorder = function(head) {
   return isSouthOrEastBrdr(coordX,coordY) || isNorthOrWestBrdr(coordX,coordY);
 }
 
-const getCoordOfBody = function(body) {
+const getCoordsOfBody = function(body) {
   return body.map(function(position) {
     return {x:position.x,y:position.y};
   })
 }
 
 const hasTouchedItself = function(head,body) {
-
-
+  let bodyCoords=getCoordsOfBody(body);
+  return bodyCoords.some(function(bodyCoord) {
+    return head.isSameCoordAs(bodyCoord);
+  })
 }
 
 const displayResult = function() {
@@ -52,8 +55,12 @@ const displayResult = function() {
   playAgainLink.innerHTML = "Click here to Play Again";
 }
 
-const endGame= function(head) {
-  if (hasTouchedBorder(head)) {
+const isGameOver = function (head,body) {
+  return hasTouchedBorder(head,body) || hasTouchedItself(head,body);
+}
+
+const endGame= function(head,body) {
+  if (isGameOver(head,body)) {
     clearInterval(animator);
     displayResult();
   }
