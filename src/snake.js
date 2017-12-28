@@ -18,6 +18,12 @@ Snake.prototype={
   grow:function() {
     this.body.unshift(new Position(Infinity,Infinity,this.direction));
   },
+  hasEatenItself:function() {
+    let snakeRef = this;
+    return snakeRef.body.some(function(bodyPart) {
+      return snakeRef.head.isSameCoordAs(bodyPart);
+    })
+  },
   turnLeft:function() {
     this.head=this.head.turnLeft();
   },
